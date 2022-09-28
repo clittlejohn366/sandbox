@@ -1,0 +1,427 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "## My Visualization Workbook\n---\n\nThis is the workbook for simple stats and visualizations.\nPlease contact the SOC for more information.\n713-555-1234"
+      },
+      "name": "text - 2"
+    },
+    {
+      "type": 11,
+      "content": {
+        "version": "LinkItem/1.0",
+        "style": "tabs",
+        "links": [
+          {
+            "id": "6721f86d-6cbe-46c5-8712-5d887d12d171",
+            "cellValue": "Tab",
+            "linkTarget": "parameter",
+            "linkLabel": "First Set",
+            "subTarget": "First",
+            "preText": "First Set",
+            "postText": "FIRST SET",
+            "style": "link",
+            "linkIsContextBlade": true
+          },
+          {
+            "id": "9ff4ab55-82e2-4492-8b77-e0bbb8d5646b",
+            "cellValue": "Tab",
+            "linkTarget": "parameter",
+            "linkLabel": "Second Set",
+            "subTarget": "Second",
+            "preText": "Second Set",
+            "postText": "SECOND SET",
+            "style": "link",
+            "linkIsContextBlade": true
+          },
+          {
+            "id": "3beded24-b26c-4d24-9655-a351086c4f3e",
+            "cellValue": "Tab",
+            "linkTarget": "parameter",
+            "linkLabel": "Third Set",
+            "subTarget": "Third",
+            "style": "link",
+            "linkIsContextBlade": true
+          },
+          {
+            "id": "22412aac-5585-4e81-aa3b-29e97420a147",
+            "cellValue": "Tab",
+            "linkTarget": "parameter",
+            "linkLabel": "Fourth Set",
+            "subTarget": "Fourth",
+            "style": "link"
+          }
+        ]
+      },
+      "name": "links - 4"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "title": "Bar",
+        "items": [
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "union withsource=[\"$TableName\"] *\r\n| summarize Count=count() by TableName=[\"$TableName\"]\r\n| render barchart",
+              "size": 0,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "areachart"
+            },
+            "customWidth": "50",
+            "name": "query - 2",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": [
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "SigninLogs \r\n| where CreatedDateTime >= ago(7d)\r\n| summarize signInCount = count() by Identity \r\n| sort by signInCount desc ",
+                    "size": 4,
+                    "title": "Logins Last 7 Days",
+                    "timeContext": {
+                      "durationMs": 2592000000
+                    },
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces",
+                    "visualization": "barchart"
+                  },
+                  "name": "List 1",
+                  "styleSettings": {
+                    "showBorder": true
+                  }
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "SigninLogs \r\n| where CreatedDateTime >= ago(7d)\r\n| summarize signInCount = count() by AppDisplayName \r\n| sort by signInCount desc ",
+                    "size": 4,
+                    "title": "App Usage Last 7 Days",
+                    "timeContext": {
+                      "durationMs": 86400000
+                    },
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces",
+                    "visualization": "barchart"
+                  },
+                  "name": "List 2",
+                  "styleSettings": {
+                    "showBorder": true
+                  }
+                }
+              ]
+            },
+            "customWidth": "50",
+            "name": "group - 1",
+            "styleSettings": {
+              "showBorder": true
+            }
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "First"
+      },
+      "name": "Bar - Copy - Copy - Copy"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "SigninLogs\r\n| where CreatedDateTime > ago(7d)\r\n| project TimeGenerated,Identity,AlternateSignInName,AppDisplayName,IPAddress\r\n| sort by TimeGenerated desc \r\n| take 10",
+              "size": 0,
+              "title": "Sign in Logs",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table"
+            },
+            "customWidth": "50",
+            "name": "query - 2",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "SigninLogs \r\n| where CreatedDateTime >= ago(7d)\r\n| summarize signInCount = count() by AppDisplayName \r\n| sort by signInCount desc \r\n",
+              "size": 0,
+              "timeContext": {
+                "durationMs": 604800000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces"
+            },
+            "customWidth": "50",
+            "name": "query - 3",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "First"
+      },
+      "name": "group - 6",
+      "styleSettings": {
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "title": "Bar",
+        "items": [
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "union withsource=[\"$TableName\"] *\r\n| summarize Count=count() by TableName=[\"$TableName\"]\r\n| render barchart",
+              "size": 0,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces"
+            },
+            "customWidth": "50",
+            "name": "query - 2",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "union withsource=[\"$TableName\"] *\r\n| summarize Count=count() by TableName=[\"$TableName\"]\r\n| render barchart",
+              "size": 0,
+              "title": "Grid",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table"
+            },
+            "customWidth": "50",
+            "name": "query - 3",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "Second"
+      },
+      "name": "Bar"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "union withsource=[\"$TableName\"] *\r\n| summarize Count=count() by TableName=[\"$TableName\"]\r\n| render barchart",
+              "size": 0,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "areachart"
+            },
+            "customWidth": "50",
+            "name": "query - 1",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "SigninLogs \r\n| where CreatedDateTime >= ago(7d)\r\n| summarize signInCount = count() by Identity \r\n| sort by signInCount desc ",
+              "size": 0,
+              "title": "Login Count Last 7 Days",
+              "timeContext": {
+                "durationMs": 604800000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "barchart"
+            },
+            "customWidth": "50",
+            "name": "query - 5",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "Third"
+      },
+      "name": "group - 4"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "title": "Bar",
+        "items": [
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "union withsource=[\"$TableName\"] *\r\n| summarize Count=count() by TableName=[\"$TableName\"]\r\n| render barchart",
+              "size": 0,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces"
+            },
+            "customWidth": "50",
+            "name": "query - 2",
+            "styleSettings": {
+              "maxWidth": "50",
+              "showBorder": true
+            }
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": [
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "OfficeActivity\r\n| take 20\r\n| project TimeGenerated,Operation",
+                    "size": 0,
+                    "timeContext": {
+                      "durationMs": 2592000000
+                    },
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces",
+                    "visualization": "table"
+                  },
+                  "name": "query - 2",
+                  "styleSettings": {
+                    "showBorder": true
+                  }
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "OfficeActivity\r\n|take 20\r\n|project TimeGenerated,Type,Operation",
+                    "size": 0,
+                    "timeContext": {
+                      "durationMs": 86400000
+                    },
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces"
+                  },
+                  "name": "query - 2",
+                  "styleSettings": {
+                    "showBorder": true
+                  }
+                }
+              ]
+            },
+            "customWidth": "50",
+            "name": "group - 1",
+            "styleSettings": {
+              "showBorder": true
+            }
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "Fourth"
+      },
+      "name": "Bar - Copy - Copy"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "SigninLogs \r\n| where CreatedDateTime >= ago(7d)\r\n| summarize signInCount = count() by Identity\r\n| sort by signInCount desc \r\n\r\n",
+        "size": 1,
+        "timeContext": {
+          "durationMs": 86400000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "visualization": "barchart"
+      },
+      "conditionalVisibility": {
+        "parameterName": "Tab",
+        "comparison": "isEqualTo",
+        "value": "Fourth"
+      },
+      "name": "query - 7"
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/b9823b6e-801b-4400-8c83-3964429947c9/resourceGroups/AzureSentinelWS/providers/Microsoft.OperationalInsights/workspaces/Workspace1"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
