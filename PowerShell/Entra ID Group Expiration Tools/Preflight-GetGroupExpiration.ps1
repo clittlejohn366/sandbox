@@ -9,8 +9,9 @@
 #          Connect-AzureAD
 #
 #*****************************************************************************************************
+$UserName = "admin@<TENANTNAME>.onmicrosoft.com"
 
-#$UserCred = get-credential -Message "Tenant Login" -UserName "admin@M365w897810.onmicrosoft.com"
+#$UserCred = get-credential -Message "Tenant Login" -UserName $UserName
 #Connect-ExchangeOnline -UserPrincipalName $usercred.UserName
 #Connect-AzureAD -Credential $UserCred
 
